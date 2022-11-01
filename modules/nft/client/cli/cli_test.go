@@ -169,11 +169,11 @@ func (s *IntegrationTestSuite) TestNft() {
 	s.Require().Equal(from.String(), nftItem.Owner)
 
 	//------test GetCmdQueryOwner()-------------
-	respType = proto.Message(&nfttypes.QueryNFTsOfOwnerResponse{})
+	respType = proto.Message(&nfttypes.QueryOwnerResponse{})
 	bz, err = nfttestutil.QueryOwnerExec(val.ClientCtx, from.String())
 	s.Require().NoError(err)
 	s.Require().NoError(val.ClientCtx.Codec.UnmarshalJSON(bz.Bytes(), respType))
-	ownerResp := respType.(*nfttypes.QueryNFTsOfOwnerResponse)
+	ownerResp := respType.(*nfttypes.QueryOwnerResponse)
 	s.Require().Equal(from.String(), ownerResp.Owner.Address)
 	s.Require().Equal(denom, ownerResp.Owner.IDCollections[0].DenomId)
 	s.Require().Equal(tokenID, ownerResp.Owner.IDCollections[0].TokenIds[0])

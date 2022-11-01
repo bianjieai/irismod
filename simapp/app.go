@@ -97,8 +97,8 @@ import (
 	"github.com/irisnet/irismod/modules/mt"
 	mtkeeper "github.com/irisnet/irismod/modules/mt/keeper"
 	mttypes "github.com/irisnet/irismod/modules/mt/types"
+	"github.com/irisnet/irismod/modules/nft"
 	nftkeeper "github.com/irisnet/irismod/modules/nft/keeper"
-	nft "github.com/irisnet/irismod/modules/nft/module"
 	nfttypes "github.com/irisnet/irismod/modules/nft/types"
 	"github.com/irisnet/irismod/modules/oracle"
 	oracleKeeper "github.com/irisnet/irismod/modules/oracle/keeper"
@@ -357,8 +357,6 @@ func NewSimApp(
 	app.NFTKeeper = nftkeeper.NewKeeper(
 		appCodec,
 		keys[nfttypes.StoreKey],
-		app.AccountKeeper,
-		app.BankKeeper,
 	)
 
 	app.MTKeeper = mtkeeper.NewKeeper(

@@ -176,10 +176,11 @@ func (s *IntegrationTestSuite) TestNft() {
 	//------test GetCmdQueryOwner()-------------
 	url = fmt.Sprintf("%s/irismod/nft/nfts?owner=%s", baseURL, from.String())
 	resp, err = rest.GetRequest(url)
-	respType = proto.Message(&nfttypes.QueryNFTsOfOwnerResponse{})
+
+	respType = proto.Message(&nfttypes.QueryOwnerResponse{})
 	s.Require().NoError(err)
 	s.Require().NoError(val.ClientCtx.Codec.UnmarshalJSON(resp, respType))
-	ownerResp := respType.(*nfttypes.QueryNFTsOfOwnerResponse)
+	ownerResp := respType.(*nfttypes.QueryOwnerResponse)
 	s.Require().Equal(from.String(), ownerResp.Owner.Address)
 	s.Require().Equal(denom, ownerResp.Owner.IDCollections[0].DenomId)
 	s.Require().Equal(tokenID, ownerResp.Owner.IDCollections[0].TokenIds[0])
